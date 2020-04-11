@@ -2,16 +2,28 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'; 
 import { loginUser } from '../../../redux/actions/authActions'
 
+
+
 const mapActionsToProps = dispatch => ({
   commenceLogin(email, password) {
     dispatch(loginUser(email, password))
   }
-})
+});
+
+const mapStateToProps = (state) => {
+  return { auth: state.auth }
+}
 
 class LoginForm extends Component {
   state = {
     email: "",
     password: "",
+  }
+  
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if( nextProps.auth.token ){
+      this.props.onLogin();
+    }
   }
 
   login(e) {
@@ -43,4 +55,4 @@ class LoginForm extends Component {
   }
 }
 
-export default connect(null, mapActionsToProps)(LoginForm);
+export default connect(mapStateToProps, mapActionsToProps)(LoginForm);
