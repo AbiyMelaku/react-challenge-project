@@ -10,6 +10,7 @@ const AppRouter = (props) => {
         <Route path="/" exact component={Main} />
         <Route path="/login" exact component={Login} />
         <RouteProtector path="/order" exact component={OrderForm} />
+        <RouteProtector path="/order/:id" component={OrderForm} />
         <RouteProtector path="/view-orders" exact component={ViewOrders} />
       </Switch>
     </Router>
